@@ -1,0 +1,605 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string Tetris[50];
+    int row,column;
+    int tetris_col[50];
+
+    cin >> row ;
+    cin >> column;
+    int i=0;
+    int game[row+5][column];
+    bool game_end = false;
+
+    for (int i=0; i<row+4; i++)
+    {
+        for (int j=0; j<column; j++)
+        {
+            game[i][j]=0;
+        }
+    }
+    for(int j=0;j<column;j++)
+    {
+        game[row+4][j]=1;
+    }
+
+    while(!game_end)
+    {
+        cin >> Tetris[i];
+        if(Tetris[i]=="T1")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[4][tetris_col[i]-1]==1 || game[4][tetris_col[i]+1]==1 || game[5][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=5;k<row+4;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k][tetris_col[i]+1]==1 || game[k+1][tetris_col[i]]==1)
+                    {
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]+1]=1;
+                        game[k][tetris_col[i]]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="T2")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[4][tetris_col[i]-1]==1 || game[5][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else if(game[5][tetris_col[i]-1]==1 || game[6][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game[5][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+4;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k+1][tetris_col[i]]==1)
+                    {
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-2][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k][tetris_col[i]]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+
+        }
+        else if(Tetris[i]=="T3")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]-1]==1 || game[4][tetris_col[i]]==1 || game[4][tetris_col[i]+1]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1 || game[5][tetris_col[i]]==1 || game[5][tetris_col[i]+1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game[4][tetris_col[i]+1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k][tetris_col[i]]==1 || game[k][tetris_col[i]+1]==1)
+                    {
+                        game[k-2][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]+1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+
+        }
+        else if(Tetris[i]=="T4")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]-1]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[4][tetris_col[i]]==1 || game[5][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else if(game[5][tetris_col[i]]==1 || game[6][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game[5][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+4;k++)
+                {
+                    if(game[k][tetris_col[i]]==1 || game[k+1][tetris_col[i]-1]==1)
+                    {
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-2][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k][tetris_col[i]-1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+
+        }
+        else if(Tetris[i]=="L1")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]-1]==1 || game[4][tetris_col[i]]){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1 || game[5][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else if(game[6][tetris_col[i]-1]==1 || game[6][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[5][tetris_col[i]-1]=1;
+                game[5][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=7;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k][tetris_col[i]]==1)
+                    {
+                        game[k-3][tetris_col[i]-1]=1;
+                        game[k-2][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="L2")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]-1]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1 || game[4][tetris_col[i]]==1 || game[4][tetris_col[i]+1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k-1][tetris_col[i]]==1 || game[k-1][tetris_col[i]+1]==1)
+                    {
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-2][tetris_col[i]-1]=1;
+                        game[k-2][tetris_col[i]]=1;
+                        game[k-2][tetris_col[i]+1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="L3")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else if(game[4][tetris_col[i]-1]==1 || game[6][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]]=1;
+                game[5][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=5;k<row+3;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k+2][tetris_col[i]]==1)
+                    {
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k][tetris_col[i]]=1;
+                        game[k+1][tetris_col[i]]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="L4")
+        {
+            cin >> tetris_col[i];/* if(game[4][tetris_col[i]-1]==1 || game[4][tetris_col[i]]==1 || game[4][tetris_col[i]+1]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1 || game[5][tetris_col[i]]==1 || game[5][tetris_col[i]+1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game[4][tetris_col[i]+1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k][tetris_col[i]]==1 || game[k][tetris_col[i]+1]==1)
+                    {
+                        game[k-2][tetris_col[i]+1]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]+1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="J1")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]-1]==1 || game[4][tetris_col[i]]){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1 || game[5][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else if(game[6][tetris_col[i]-1]==1 || game[6][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]]=1;
+                game[5][tetris_col[i]-1]=1;
+                game[5][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=7;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k][tetris_col[i]]==1)
+                    {
+                        game[k-3][tetris_col[i]]=1;
+                        game[k-2][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="J2")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]-1]==1 || game[4][tetris_col[i]]==1 || game[4][tetris_col[i]+1]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1 || game[5][tetris_col[i]]==1 || game[5][tetris_col[i]+1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game[4][tetris_col[i]+1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k][tetris_col[i]]==1 || game[k][tetris_col[i]+1]==1)
+                    {
+                        game[k-2][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]+1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+
+        }
+        else if(Tetris[i]=="J3")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]-1]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else if(game[4][tetris_col[i]]==1 || game[6][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[5][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=5;k<row+3;k++)
+                {
+                    if(game[k][tetris_col[i]]==1 || game[k+2][tetris_col[i]-1]==1)
+                    {
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k][tetris_col[i]-1]=1;
+                        game[k+1][tetris_col[i]-1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="J4")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]+1]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]+1]==1 || game[4][tetris_col[i]]==1 || game[4][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]+1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]+1]==1 || game[k-1][tetris_col[i]]==1 || game[k-1][tetris_col[i]-1]==1)
+                    {
+                        game[k-1][tetris_col[i]+1]=1;
+                        game[k-2][tetris_col[i]+1]=1;
+                        game[k-2][tetris_col[i]]=1;
+                        game[k-2][tetris_col[i]-1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="S1")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]-1]==1 || game[4][tetris_col[i]]){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1 || game[5][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k][tetris_col[i]]==1)
+                    {
+                        game[k-2][tetris_col[i]+1]=1;
+                        game[k-2][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="S2")
+        {
+            cin >> tetris_col[i];/*if(game[4][tetris_col[i]]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[4][tetris_col[i]-1]==1 || game[5][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else if(game[5][tetris_col[i]-1]==1 || game[6][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game[5][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+4;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k+1][tetris_col[i]]==1)
+                    {
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-2][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k][tetris_col[i]]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+
+        }
+        else if(Tetris[i]=="Z1")
+        {
+            cin >> tetris_col[i];
+            /*if(game[4][tetris_col[i]+1]==1 || game[4][tetris_col[i]]){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]+1]==1 || game[5][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]]=1;
+                game[4][tetris_col[i]+1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]+1]==1 || game[k][tetris_col[i]]==1)
+                    {
+                        game[k-2][tetris_col[i]-1]=1;
+                        game[k-2][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]+1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="Z2")
+        {
+            cin >> tetris_col[i];
+            /*if(game[4][tetris_col[i]-1]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[4][tetris_col[i]]==1 || game[5][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else if(game[5][tetris_col[i]]==1 || game[6][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game[5][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+4;k++)
+                {
+                    if(game[k][tetris_col[i]]==1 || game[k+1][tetris_col[i]-1]==1)
+                    {
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-2][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k][tetris_col[i]-1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="O")
+        {
+            cin >> tetris_col[i];
+            /*if(game[4][tetris_col[i]-1]==1 || game[4][tetris_col[i]]){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1 || game[5][tetris_col[i]]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[4][tetris_col[i]]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=6;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1 || game[k][tetris_col[i]]==1)
+                    {
+                        game[k-2][tetris_col[i]-1]=1;
+                        game[k-2][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="I1")
+        {
+            cin >> tetris_col[i];
+            /*if(game[4][tetris_col[i]-1]==1){game_end = true;cout << "end" << endl;}*/
+            if(game[5][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else if(game[6][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[5][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else if(game[7][tetris_col[i]-1]==1)
+            {
+                game[4][tetris_col[i]-1]=1;
+                game[5][tetris_col[i]-1]=1;
+                game[6][tetris_col[i]-1]=1;
+                game_end = false;
+            }
+            else
+            {
+                for(int k=8;k<row+5;k++)
+                {
+                    if(game[k][tetris_col[i]-1]==1)
+                    {
+                        game[k-4][tetris_col[i]-1]=1;
+                        game[k-3][tetris_col[i]-1]=1;
+                        game[k-2][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]-1]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="I2")
+        {
+            cin >> tetris_col[i];
+            /*if(game[4][tetris_col[i]-1]==1 || game[4][tetris_col[i]]==1 || game[4][tetris_col[i]+1]==1 || game[4][tetris_col[i]+2]==1){game_end = true;cout << "end" << endl;}*/
+            //else
+            {
+                for(int k=5;k<row+5;k++)
+                {
+                    if(game[k-1][tetris_col[i]-1]==1 || game[k][tetris_col[i]]==1 || game[k][tetris_col[i]+1]==1 || game[k][tetris_col[i]+2]==1)
+                    {
+                        game[k-1][tetris_col[i]-1]=1;
+                        game[k-1][tetris_col[i]]=1;
+                        game[k-1][tetris_col[i]+1]=1;
+                        game[k-1][tetris_col[i]+2]=1;
+                        game_end = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(Tetris[i]=="End")
+        {
+            game_end = true;
+            break;
+        }
+        for(int i=row+3;i>3;i--)
+        {
+            int sum=0;
+            for(int j=0;j<column;j++)
+            {
+                if(game[i][j]==1)
+                    sum=sum+1;
+            }
+            if(sum==column)
+            {
+                for(int k=i;k>3;k--)
+                {
+                    for(int j=0;j<column;j++)
+                        game[k][j]=game[k-1][j];
+                }
+                i=i+1;
+            }
+        }
+        i++;
+    }
+    for (int k=4; k<row+4; k++)
+    {
+        for (int j=0; j<column; j++)
+        {
+            cout << game[k][j] << " " ;
+        }
+        cout << endl ;
+    }
+    return 0;
+}
